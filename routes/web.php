@@ -76,6 +76,10 @@ Route::group(['middleware' => ['auth','get.menu']], function () {
     ]);
 
     Route::group(['middleware' => ['role:admin']], function () {
+        Route::resource('grape_types', 'GrapeTypesController');
+
+
+
         Route::resource('bread',  'BreadController');   //create BREAD (resource)
         Route::resource('users',        'UsersController')->except( ['create', 'store'] );
         Route::resource('roles',        'RolesController');

@@ -2,10 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Menus;
+use App\Models\Menulist;
+use App\Models\Menurole;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Support\Facades\DB;
 
 class MenusTableSeeder extends Seeder
 {
@@ -126,6 +129,9 @@ class MenusTableSeeder extends Seeder
      */
     public function run()
     { 
+        Menus::truncate();
+        Menurole::truncate();
+        Menulist::truncate();
         /* Get roles */
         $this->adminRole = Role::where('name' , '=' , 'admin' )->first();
         $this->userRole = Role::where('name', '=', 'user' )->first();
@@ -136,6 +142,7 @@ class MenusTableSeeder extends Seeder
         $this->menuId = DB::getPdo()->lastInsertId();  //set menuId
         $this->insertLink('user,admin', 'Dashboard', '/', 'cil-speedometer');
         $this->beginDropdown('admin', 'Settings', 'cil-calculator');
+            $this->insertLink('admin', 'Castas',                   '/grape_types');
             $this->insertLink('admin', 'Notes',                   '/notes');
             $this->insertLink('admin', 'Users',                   '/users');
             $this->insertLink('admin', 'Edit menu',               '/menu/menu');
