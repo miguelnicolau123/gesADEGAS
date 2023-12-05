@@ -104,8 +104,6 @@ class NotesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //var_dump('bazinga');
-        //die();
         $validatedData = $request->validate([
             'title'             => 'required|min:1|max:64',
             'content'           => 'required',

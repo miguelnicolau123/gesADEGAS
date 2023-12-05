@@ -11,6 +11,11 @@ class GrapeType extends Model
 
     protected $table = 'grape_types';
 
+    protected $fillable = [
+        'name',
+        'yeld_percentage',
+    ];
+
 
     public function getReadableYeldPercentageAttribute(){
         return $this->yeld_percentage*100 .'%';

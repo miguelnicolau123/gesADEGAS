@@ -27,7 +27,7 @@ class GrapeTypesController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.admin.grape_types.create');
     }
 
     /**
@@ -38,7 +38,15 @@ class GrapeTypesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name'             => 'required',
+            'yeld_percentage'  => 'required|min:1|max:100',
+        ]);
+
+        $validatedData["yeld_percentage"] = $validatedData["yeld_percentage"]/100;
+        GrapeType::create($validatedData);
+
+        return redirect()->route('grape_types.index');
     }
 
     /**
@@ -60,7 +68,7 @@ class GrapeTypesController extends Controller
      */
     public function edit(GrapeType $grapeType)
     {
-        //
+        return view('dashboard.admin.grape_types.edit', [ 'grape_type' => $grapeType ]);
     }
 
     /**
@@ -72,7 +80,16 @@ class GrapeTypesController extends Controller
      */
     public function update(Request $request, GrapeType $grapeType)
     {
-        //
+        $validatedData = $request->validate([
+            'name'             => 'required',
+            'yeld_percentage'  => 'required|min:1|max:100',
+        ]);
+
+        $validatedData["yeld_percentage"] = $validatedData["yeld_percentage"]/100;
+        
+        $grapeType->update($validatedData);
+
+        return redirect()->route('grape_types.index');
     }
 
     /**
@@ -81,8 +98,10 @@ class GrapeTypesController extends Controller
      * @param  \App\Models\GrapeType  $grapeType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GrapeType $grapeType)
+    public function destroy(Request $request, GrapeType $grapeType)
     {
-        //
+        $grapeType->delete();
+        $request->session()->flash('message', 'Casta apagada com sucesso!');
+        return redirect()->route('grape_types.index');
     }
 }

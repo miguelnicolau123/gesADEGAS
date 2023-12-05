@@ -36,7 +36,6 @@
     <meta name="theme-color" content="#ffffff">
     <!-- Icons-->
     <link href="{{ asset('css/free.min.css') }}" rel="stylesheet"> <!-- icons -->
-    <link href="{{ asset('css/flag-icon.min.css') }}" rel="stylesheet"> <!-- icons -->
     <!-- Main styles for this application-->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
@@ -58,13 +57,14 @@
     </script>
 
     <link href="{{ asset('css/coreui-chartjs.css') }}" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
 
 
 
   <body class="c-app">
     <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
-
       @include('dashboard.shared.nav-builder')
 
       @include('dashboard.shared.header')
